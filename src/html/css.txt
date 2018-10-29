@@ -1,0 +1,123 @@
+CSS中关于多个class样式设置的不同写法 
+
+
+<div class="containerA">
+    这是AAAAAAAAAAAAAAAAAAAAAAA样式
+    <div class="containerB">
+        这是BBBBBBBBBBBBBBBBBBBBBB样式
+    </div>
+</div>
+
+css中：
+
+.containerA .containerB {
+    color: red;
+    font-size: 28px;
+}
+
+
+.containerA ,.containerB {
+    color: red;
+    font-size: 28px;
+}
+
+
+这两种写法是有区别的，前者用空格隔开，表示接下来对A下面的B样式进行修改。
+
+而后者用逗号隔开，表示接下来对A和B两者的样式都进行修改。
+
+
+同时使用多个class
+
+
+当把一段落同时定义为多个类时，类的样式会叠加。如果有互相冲突的样式，后面的类覆盖前面的。
+
+
+可以利用这种特性。例如：
+
+html:
+[html] view plain copy
+
+    <p class="content">nornal</p>  
+    <p class="content red">red words</p>  
+
+css:
+[css] view plain copy
+
+    .content{  
+    font-size:12px;  
+    color:#333333;  
+    border-bottom:1px solid #333333;}  
+      
+    .red{  
+    color:red;}  
+
+最终的效果为，normal字样的字号为12px，有灰色下划线，字体颜色为灰色。red words字样的字号为12px，有灰色下划线，字体颜色为红色。
+
+
+
+
+如何让HTML标签的同时加载多个样式类(HTML)
+
+
+<style>
+.class1{font-weight:bold;font-size:45px;}
+.class2{color:red;}
+</style>
+
+<div class="class1 class2">asdfa</div>
+
+更多的类,同理
+
+
+
+
+
+
+HTML中设置多个class属性的优先级
+
+class命名规则是 [颜色名]-[定义序号] ，也就是越后定义的序号越大，从下图的结果可以看出，
+序号越大（后定义），class的优先级越高，而与class使用的先后顺序无关
+若同时应用多个class，后定义的优先（即近者优先），加上!important最优先！ 
+
+    <!DOCTYPE html>  
+    <html>  
+    <head>  
+        <title>Class Priority Test</title>  
+        <style type="text/css">  
+      
+            div {  
+                margin-top: 5px;  
+                color: #fff;  
+            }  
+            .red-1 {  
+                background-color: red;  
+            }  
+      
+            .green-2 {  
+            background-color:green;  
+            }  
+      
+            .red-3 {  
+            background-color:red;  
+            }  
+        </style>  
+    </head>  
+    <body>  
+        <div class="red-1 green-2">  
+             初始状态 red-1 green-2  
+        </div>  
+      
+        <div class="green-2 red-1">  
+             交换class使用顺序，green-2 red-1  
+        </div>  
+      
+        <div class="green-2 red-3">  
+             交换class定义顺序，green-2 red-3  
+        </div>  
+      
+    </body>  
+    </html>  
+
+水平居中块元素
+有margin: auto的方法，也有text-align: center的方法，更有display: box; box-orient: horizontal; 
