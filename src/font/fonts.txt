@@ -1,0 +1,153 @@
+## Fonts and language
+
+```bash
+	sudo aptitude install fonts-wqy-zenhei ttf-mscorefonts-installer ttf-liberation
+	sudo dpkg-reconfigure fontconfig-config
+	sudo dpkg-reconfigure fontconfig
+	sudo fc-cache -fv 
+```
+
+## linux字体安装
+
+```bash
+    查看当前系统安装的中文字体
+    # fc-list :lang=zh
+    # cd /root/Desktop
+    # cp msyh.ttf msyhbd.ttf  /usr/share/fonts/win/
+    建立字体索引信息，更新字体缓存：
+    sudo chmod u+rwx /usr/share/fonts/xpfonts/*
+    # cd /usr/share/fonts/win
+    # mkfontscale
+    # mkfontdir
+    # fc-cache
+    # sudo fc-cache -fv 
+    # fc-list :lang=zh
+```
+
+## Terminal fonts
+
+```bash
+ sudo aptitude install console-terminus ttf-dejavu fonts-droid ttf-inconsolata xfonts-terminus
+ 
+ sudo nano /etc/default/console-setup
+ FONTFACE="Terminus
+ sudo dpkg-reconfigure console-setup
+ 
+ sudo dpkg-reconfigure locales
+ echo $LANG #zh_CN.UTF-8
+ sudo locale charmap #UTF-8
+ 
+ 
+ #export LANGUAGE=en_US.UTF-8
+ #export LANG=en_US.UTF-8
+ #export LC_ALL=en_US.UTF-8
+```
+
+## locale
+
+```bash
+  nano /etc/locale.gen
+  en_US ISO-8859-1
+  en_US.UTF-8 UTF-8
+  zh_CN GB2312
+  zh_CN.GBK GBK
+  zh_CN.UTF-8 UTF-8  
+
+  nano ~/.bashrc
+  export LANG=en_US
+  source ~/.bashrc
+
+  sudo locale-gen
+  Generating locales (this might take a while)...
+    en_US.UTF-8... done
+    zh_CN.UTF-8... done
+  Generation complete.
+  
+Remove locales
+  
+  apt-get install  localepurge
+  localepurge
+   
+  find ~/.fonts -iname *MingLiU*
+  /home/mike/.fonts/mingliu.ttf
+  /home/mike/.fonts/mingliu.ttc
+```bash
+
+## Qt applications font size
+
+```bash
+export QT_SCALE_FACTOR=1.5
+sqlitebrowser
+qbittorrent
+```
+
+## matplotlib font
+
+```python
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+from matplotlib.font_manager import FontManager
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+font_name = "MingLiU"
+mpl.rcParams['font.family']=font_name
+
+plt.text(0.5, 0.5, s=u'测试')
+plt.show()
+```
+
+## 系统可用的中文字体 
+
+```python
+    import subprocess
+    fm = FontManager()
+    mat_fonts = set(f.name for f in fm.ttflist)
+    #print(mat_fonts)
+    output = subprocess.check_output('fc-list :lang=zh -f "%{family}\n"', shell=True)
+    #print( '*' * 10, '系统可用的中文字体', '*' * 10)
+    #print (output)
+    zh_fonts = set(f.split(',', 1)[0] for f in output.decode('utf-8').split('\n'))
+    available = mat_fonts & zh_fonts
+    print ('*' * 10, '可用的字体', '*' * 10)
+    for f in available:
+         print (f)
+```
+
+
+## font links
+
+Top 10 Programming Fonts 
+ http://hivelogic.com/articles/top-10-programming-fonts/
+
+development environment - Recommended Fonts for Programming? - Stack Overflow 
+ https://stackoverflow.com/questions/4689/recommended-fonts-for-programming
+
+ide - Best font for coding - Stack Overflow 
+ https://stackoverflow.com/questions/1028527/best-font-for-coding
+
+Inconsolata 
+ http://www.levien.com/type/myfonts/inconsolata.html
+ 
+ GitHub - google/fonts: Font files available from Google Fonts 
+ https://github.com/google/fonts
+
+编程最佳字体Inconsolata和Consolas - 从价值出发 - CSDN博客 
+ http://blog.csdn.net/yimingt/article/details/71081843
+ 
+ Linux字体美化实战(Fontconfig配置) [金步国] 
+ http://www.jinbuguo.com/gui/linux_fontconfig.html 
+ 
+ sciencemeetproductivity.tumblr.com/how-to-set-helvetica-as-the-default-sans-serif-font-in.md at master · olgabot/sciencemeetproductivity.tumblr.com · GitHub 
+ https://github.com/olgabot/sciencemeetproductivity.tumblr.com/blob/master/posts/2012/11/how-to-set-helvetica-as-the-default-sans-serif-font-in.md
+
+List all fonts available in matplotlib plus samples 
+ http://jonathansoma.com/lede/data-studio/matplotlib/list-all-fonts-available-in-matplotlib-plus-samples/
+
+http://zenozeng.github.io/Free-Chinese-Fonts/ 
+ http://zenozeng.github.io/Free-Chinese-Fonts/
+
+有哪些值得推荐的中文字体？ - 知乎 
+ https://www.zhihu.com/question/20727176
+ 
+## best font
+InconsolataGo-Regular.ttf 

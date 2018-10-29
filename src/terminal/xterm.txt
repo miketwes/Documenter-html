@@ -1,0 +1,71 @@
+=================
+Xterm reference
+=================
+
+
+Build xterm
+______________________________________________________
+
+    ::
+    
+    tar xzf  http://invisible-island.net/datafiles/release/xterm.tar.gz
+
+get the folder xterm-300, edit charproc.c  in folder xterm-300
+
+replace all
+SELECT, CUT_BUFFER0
+with
+PRIMARY, CLIPBOARD, CUT_BUFFER0
+
+add line
+ <Btn3Down> : insert-selection(PRIMARY, CLIPBOARD, CUT_BUFFER0)  \n\
+ after the line
+ Shift <KeyPress> Insert:insert-selection(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
+        
+
+Reference Xterm friendly copy-and-paste :
+______________________________________________________
+
+http://www.davidsimmons.com/soft/xtermhacks/
+
+
+
+
+solution for "configure: error: Unable to successfully link Athena library (-lXaw) with test program"
+::
+    sudo aptitude install libxaw7-dev
+
+solution for "curses.h: No such file or directory"
+::
+    sudo aptitude install ncurses-dev
+    export LIBS=" -lncurses"
+or 
+::
+    sudo aptitude install libreadline-dev
+solution for xtermcap.c:327: undefined reference to `tgetent'
+
+
+    gcc -g -O2 -o xterm button.o cachedGCs.o charproc.o charsets.o \
+    cursor.o data.o doublechr.o fontutils.o input.o main.o menu.o misc.o \
+    print.o ptydata.o screen.o scrollbar.o tabs.o util.o xstrings.o xtermcap.o \
+    VTPrsTbl.o TekPrsTbl.o Tekproc.o \
+    -lXft -lfontconfig -lXaw -lXmu -lXext -lXt -lSM -lICE -lX11 -lncurses
+
+configure配置时，添加LDFLAGS="-lncurses"
+
+./configure
+make
+sudo make install
+
+nano ~/.Xresources
+
+xterm*vt100.initialFont: 5
+XTerm*locale: true
+xterm*Background:               white
+xterm*Foreground:               black
+xterm*cursorColor:              black
+xterm*pointerShape:             arrow
+xterm*pointerColor:             black
+
+xrdb ~/.Xresources
+xrdb -load ~/.Xresources
