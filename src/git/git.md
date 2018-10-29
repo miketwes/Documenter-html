@@ -24,6 +24,18 @@ git status
 git commit -m "first commit"
 git push
 
+git add src/git/git.md
+git status
+git commit --amend -m "add lines "
+git log
+git push -f origin master
+
+
+git reset --merge
+git rebase
+git commit --amend
+git pull
+git push
 
 ```
 
